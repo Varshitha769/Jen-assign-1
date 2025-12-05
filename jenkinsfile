@@ -1,0 +1,22 @@
+pipeline {
+    agent any
+
+    triggers {
+        githubPush()
+    }
+
+    stages {
+        stage('Pull Code') {
+            steps {
+                git branch: 'develop',
+                    url: 'https://github.com/Varshitha769/Jen-assign-1.git'
+
+                sh '''
+                mkdir -p /tmp/mycode
+                cp -r * /tmp/mycode/
+                echo "Files copied to /tmp/mycode"
+                '''
+            }
+        }
+    }
+}
