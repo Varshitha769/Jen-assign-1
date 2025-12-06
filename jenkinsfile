@@ -12,8 +12,14 @@ pipeline {
                     url: 'https://github.com/Varshitha769/Jen-assign-1.git'
 
                 sh '''
-                mkdir -p /var/lib/jenkins/mycode
-                cp -r * /var/lib/jenkins/mycode/
+                echo "Running as user:"
+                whoami
+
+                echo "Workspace:"
+                pwd
+
+                sudo mkdir -p /var/lib/jenkins/mycode
+                sudo cp -r * /var/lib/jenkins/mycode/
                 echo "Files copied to /var/lib/jenkins/mycode"
                 '''
             }
