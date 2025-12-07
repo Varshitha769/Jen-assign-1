@@ -22,7 +22,7 @@ pipeline {
                 echo "Workspace:"
                 pwd
 
-                mkdir -p $PROD_DIR
+                sudo mkdir -p $PROD_DIR
                 rsync -av --delete --exclude='.git' ./ $PROD_DIR/
                 echo "Deployed to PROD server"
                 '''
