@@ -23,7 +23,7 @@ pipeline {
                 pwd
 
                 sudo mkdir -p $PROD_DIR
-                sudo cp -r * $TEST_DIR/
+                sudo cp -r * $PROD_DIR/
                 echo "Deployed to PROD server"
                 '''
             }
