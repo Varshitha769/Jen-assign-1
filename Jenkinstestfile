@@ -1,0 +1,55 @@
+pipeline {
+    agent none
+
+    triggers {
+        githubPush()
+    }
+
+    environment {
+        REPO_URL = "https://github.com/Varshitha769/Jen-assign-1.git"
+        TEST_DIR = "/home/ubuntu/test-app"
+        PROD_DIR = "/home/ubuntu/prod-app"
+    }
+
+    stages {
+
+        stage('Run on develop branch only') {
+            when {
+                branch 'develop'
+            }
+            steps {
+                echo "Triggered by develop branch push"
+            }
+        }
+
+        stage('Deploy to Test') {
+            agent { label 'test' }
+
+            steps {
+                git branch: 'develop', url: "${https://github.com/Varshitha769/Jen-assign-1}"
+
+                sh '''
+                echo "Running on TEST node"
+                whoami
+                mkdir -p $TEST_DIR
+                cp -r * $TEST_DIR/
+                '''
+            }
+        }
+
+        stage('Deploy to Prod') {
+            agent { label 'prod' }
+
+            steps {
+                git branch: 'develop', url: "${https://github.com/Varshitha769/Jen-assign-1}"
+
+                sh '''
+                echo "Running on PROD node"
+                whoami
+                mkdir -p $PROD_DIR
+                cp -r * $PROD_DIR/
+                '''
+            }
+        }
+    }
+}
