@@ -38,7 +38,7 @@ pipeline {
         }
 
         stage('Deploy to Prod') {
-            agent { label 'prod' }
+            agent { label 'Prod' }
 
             steps {
                 git branch: 'develop', url: "${https://github.com/Varshitha769/Jen-assign-1}"
